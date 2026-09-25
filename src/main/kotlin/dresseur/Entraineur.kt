@@ -1,4 +1,4 @@
-package org.example
+package org.example.dresseur
 
 /**
  * Représente un entraîneur dans le contexte du jeu.

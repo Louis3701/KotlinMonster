@@ -1,7 +1,7 @@
 package org.example
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.example.dresseur.Entraineur
+import org.example.monde.Zone
 
 var joueur = Entraineur(1, "Sacha", 100)
 
@@ -131,15 +131,26 @@ val especeGalum = EspeceMonstre(
     caractères = "Sérieux, stoïque, fiable"
 )
 
+val route1 = Zone(
+    id = 1,
+    nom = "Route 1",
+    expZone = 10,
+    especesMonstres = mutableListOf(especeSpringleaf, especeFlamkip)
+)
+
+val route2 = Zone(
+    id = 2,
+    nom = "Route 2",
+    expZone = 20,
+    especesMonstres = mutableListOf(especeAquamy, especeLaoumi)
+)
+
+
+
 fun main() {
-    println(especeSpringleaf.afficheArt(true))
-    println(especeSpringleaf.afficheArt(false))
+    route1.zoneSuivante = route2
+    route2.zonePrecedente = route1
 
-    println(especeFlamkip.afficheArt(true))
-    println(especeFlamkip.afficheArt(false))
-
-    println(especeAquamy.afficheArt(true))
-    println(especeAquamy.afficheArt(false))
 }
 
 /**
