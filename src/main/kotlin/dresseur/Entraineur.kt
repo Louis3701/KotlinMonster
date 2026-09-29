@@ -1,5 +1,7 @@
 package org.example.dresseur
 
+import org.example.IndividuMonstre
+
 /**
  * Représente un entraîneur dans le contexte du jeu.
  *
@@ -11,14 +13,18 @@ package org.example.dresseur
  * @property argents La quantité d'argent en possession de l'entraîneur.
 
  */
+
+
+
 class Entraineur(
-    var id: Int,
+    val id: Int,
     var nom: String,
-    var argents:Int,
-    //TODO equipeMonstre
-    //TODO boiteMonstre
-    //TODO sacAKube
+    var argents: Int,
+    var equipeMonstre: MutableList<IndividuMonstre> = mutableListOf(),
+    var boiteMonstre: MutableList<IndividuMonstre> = mutableListOf()
+    // ... autres propriétés existantes s'il y en a
 ) {
+
     /**
      * Affiche les détails de l'entraîneur, y compris son nom et la quantité d'argent en sa possession.
      *

@@ -145,12 +145,22 @@ val route2 = Zone(
     especesMonstres = mutableListOf(especeAquamy, especeLaoumi)
 )
 
-
-
 fun main() {
     route1.zoneSuivante = route2
     route2.zonePrecedente = route1
 
+    val monstre1 = IndividuMonstre(1, "springleaf", 1500.0, especeSpringleaf)
+    val monstre2 = IndividuMonstre(2, "flamkip", 1500.0, especeFlamkip)
+    val monstre3 = IndividuMonstre(3, "aquamy", 1500.0, especeAquamy)
+
+    // Test de la méthode attaquer() : monstre1 attaque monstre2
+    println("PV de ${monstre2.nom} avant l'attaque : ${monstre2.pv}")
+    monstre1.attaquer(monstre2)
+    println("PV de ${monstre2.nom} après l'attaque : ${monstre2.pv}")
+
+    // Test de la méthode renommer()
+    monstre1.renommer()
+    println("Le monstre s'appelle maintenant : ${monstre1.nom}")
 }
 
 /**
@@ -173,7 +183,7 @@ fun changeCouleur(message: String, couleur: String = ""): String {
         "magenta" -> "\u001B[35m"
         "cyan" -> "\u001B[36m"
         "blanc" -> "\u001B[37m"
-        else -> "" // pas de couleur si non reconnu
+        else -> "" // pas de couleur si non reconnue
     }
     return "$codeCouleur$message$reset"
 }
