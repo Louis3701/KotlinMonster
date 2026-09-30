@@ -2,6 +2,7 @@ package org.example
 
 import org.example.item.Badge
 import org.example.dresseur.Entraineur
+import org.example.item.MonsterKube
 import org.example.monde.Zone
 
 // Joueur
@@ -193,16 +194,15 @@ val route2 = Zone(
 // PROGRAMME PRINCIPAL
 // ==============================
 
+val monsterKube = MonsterKube(
+    id = 1,
+    nom = "Kube",
+    description = "Un objet permettant de capturer un monstre sauvage.",
+    chanceCapture = 50.0
+)
+
 fun main() {
 
-    val badgePierre = Badge(
-        1,
-        "Badge Roche",
-        "Badge gagné lorsque le joueur atteint l'arène de pierre.",
-        joueur
-    )
-
-    println(badgePierre)
 }
 
 /**

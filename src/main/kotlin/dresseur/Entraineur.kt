@@ -22,6 +22,7 @@ class Entraineur(
     var argents: Int,
     var equipeMonstre: MutableList<IndividuMonstre> = mutableListOf(),
     var boiteMonstre: MutableList<IndividuMonstre> = mutableListOf()
+
     // ... autres propriétés existantes s'il y en a
 ) {
 
