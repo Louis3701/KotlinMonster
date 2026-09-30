@@ -1,6 +1,7 @@
 package org.example.dresseur
 
 import org.example.IndividuMonstre
+import org.example.item.Item
 
 /**
  * Représente un entraîneur dans le contexte du jeu.
@@ -11,19 +12,14 @@ import org.example.IndividuMonstre
  * @property id L'identifiant unique de l'entraîneur.
  * @property nom Le nom de l'entraîneur.
  * @property argents La quantité d'argent en possession de l'entraîneur.
-
  */
-
-
-
 class Entraineur(
     val id: Int,
     var nom: String,
     var argents: Int,
     var equipeMonstre: MutableList<IndividuMonstre> = mutableListOf(),
-    var boiteMonstre: MutableList<IndividuMonstre> = mutableListOf()
-
-    // ... autres propriétés existantes s'il y en a
+    var boiteMonstre: MutableList<IndividuMonstre> = mutableListOf(),
+    var sacAItems: MutableList<Item> = mutableListOf()
 ) {
 
     /**
@@ -33,7 +29,7 @@ class Entraineur(
      * 1. Le nom de l'entraîneur.
      * 2. La somme d'argent qu'il possède.
      */
-    fun afficheDetail(){
+    fun afficheDetail() {
         println("Dresseur : ${this.nom}")
         println("Argents: ${this.argents} ")
     }

@@ -1,6 +1,5 @@
 package org.example
 
-import org.example.item.Badge
 import org.example.dresseur.Entraineur
 import org.example.item.MonsterKube
 import org.example.monde.Zone
@@ -173,7 +172,7 @@ val route1 = Zone(
     especesMonstres = mutableListOf(
         especeSpringleaf,
         especeFlamkip
-    )
+    ),
 )
 
 // ==============================
@@ -187,7 +186,7 @@ val route2 = Zone(
     especesMonstres = mutableListOf(
         especeAquamy,
         especeLaoumi
-    )
+    ),
 )
 
 // ==============================
