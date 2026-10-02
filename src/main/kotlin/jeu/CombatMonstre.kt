@@ -1,4 +1,4 @@
-package org.example.monstre
+package org.example.jeu
 
 import org.example.IndividuMonstre
 import org.example.joueur
