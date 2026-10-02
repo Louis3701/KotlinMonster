@@ -24,9 +24,9 @@ class Partie(
      */
     fun choixStarter() {
         // Création des 3 starters possibles
-        val monstre1 = IndividuMonstre(1, "Springleaf", 0.0, especeSpringleaf)
-        val monstre2 = IndividuMonstre(2, "Flamkip", 0.0, especeFlamkip)
-        val monstre3 = IndividuMonstre(3, "Aquamy", 0.0, especeAquamy)
+        val monstre1 = IndividuMonstre(1, "Springleaf", 0.0, especeSpringleaf)  //Crée le 1er starter
+        val monstre2 = IndividuMonstre(2, "Flamkip", 0.0, especeFlamkip)   //Crée le 2eme starter
+        val monstre3 = IndividuMonstre(3, "Aquamy", 0.0, especeAquamy)  //Crée le 3em estarter
 
         var starter: IndividuMonstre? = null
 
@@ -85,74 +85,28 @@ class Partie(
         val position2 = readlnOrNull()?.toIntOrNull()
 
         // Vérifie que les deux positions sont valides (correspondent à des emplacements occupés)
-        if (position1 == null || position2 == null ||
-            position1 !in 1..joueur.equipeMonstre.size ||
-            position2 !in 1..joueur.equipeMonstre.size
+        if (position1 == null || position2 == null ||    // Si l'une des deux saisies n'est pas un nombre
+            position1 !in 1..joueur.equipeMonstre.size ||   // Ou si position1 est hors de la plage valide
+            position2 !in 1..joueur.equipeMonstre.size   // Ou si position2 est hors de la plage valide
         ) {
             println("Position invalide.")
             return
         }
 
         // Conversion des positions (1-indexées côté utilisateur) en index de liste (0-indexées)
-        val index1 = position1 - 1
+        val index1 = position1 - 1   // Convertit la position humaine en index de liste
         val index2 = position2 - 1
 
+
         // Échange des deux monstres dans la liste
-        val temp = joueur.equipeMonstre[index1]
-        joueur.equipeMonstre[index1] = joueur.equipeMonstre[index2]
+        val temp = joueur.equipeMonstre[index1]   // Sauvegarde temporairement le monstre à index1
+        joueur.equipeMonstre[index1] = joueur.equipeMonstre[index2]  // Met le monstre d'index2 à la place d'index1
         joueur.equipeMonstre[index2] = temp
 
         println("Ordre mis à jour !")
     }
 
-    /**
-     * Affiche l'équipe du joueur et permet de naviguer dedans.
-     * Le joueur peut taper le numéro d'un monstre pour voir son détail,
-     * taper "m" pour modifier l'ordre de l'équipe,
-     * ou taper "q" pour retourner au menu principal.
-     */
-    fun examineEquipe() {
-        var continuer = true
 
-        while (continuer) {
-            // Affiche la liste de l'équipe avec leur position
-            println("=== Équipe de ${joueur.nom} ===")
-            joueur.equipeMonstre.forEachIndexed { index, monstre ->
-                println("${index + 1}. ${monstre.nom} (Niveau ${monstre.niveau})")
-            }
-
-            println("Tapez le numéro d'un monstre pour voir son détail, 'm' pour modifier l'ordre, ou 'q' pour quitter")
-            val choix = readlnOrNull()
-
-            when {
-                choix == "q" -> {
-                    // Le joueur sort de la fonction
-                    continuer = false
-                }
-
-                choix == "m" -> {
-                    // Le joueur modifie l'ordre de l'équipe
-                    modifierOrdreEquipe()
-                }
-
-                choix != null && choix.toIntOrNull() != null -> {
-                    // Le joueur a tapé un numéro : on vérifie qu'il correspond à un monstre existant
-                    val position = choix.toInt()
-                    if (position in 1..joueur.equipeMonstre.size) {
-                        val monstre = joueur.equipeMonstre[position - 1]
-                        monstre.afficheDetail()
-                        println(monstre.espece.afficheArt())
-                    } else {
-                        println("Numéro invalide.")
-                    }
-                }
-
-                else -> {
-                    println("Choix invalide.")
-                }
-            }
-        }
-    }
 
 
 }

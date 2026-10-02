@@ -65,7 +65,6 @@ class IndividuMonstre(
 
     /**
      * Calcule l'expérience nécessaire pour atteindre un niveau.
-     *
      * Formule :
      * 100 * (niveau - 1)^2
      */

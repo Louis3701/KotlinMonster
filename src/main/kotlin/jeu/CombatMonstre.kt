@@ -14,7 +14,7 @@ class CombatMonstre(
 ) {
 
     // Numéro du round en cours, commence à 1
-    var round: Int = 1
+    var round: Int = 1   // Compteur de tours, modifiable, initialisé à 1
 
     /**
      * Vérifie si le joueur a perdu le combat.
@@ -25,7 +25,7 @@ class CombatMonstre(
      * @return `true` si le joueur a perdu, sinon `false`.
      */
     fun gameOver(): Boolean {
-        return joueur.equipeMonstre.none { it.pv > 0 }
+        return joueur.equipeMonstre.none { it.pv > 0 }   // true si aucun monstre de l'équipe n'a plus de 0 pv
     }
 
     /**
@@ -40,11 +40,12 @@ class CombatMonstre(
      * @return `true` si le joueur a gagné, `false` sinon.
      */
     fun joueurGagne(): Boolean {
-        if (monstreSauvage.pv <= 0) {
+        if (monstreSauvage.pv <= 0) {   // Cas 1 : le monstre sauvage est vaincu (0 pv ou moins)
             println("${joueur.nom} a gagné !")
 
-            val gainExp = monstreSauvage.exp * 0.20
-            monstreJoueur.exp += gainExp
+            val gainExp = monstreSauvage.exp * 0.20    // Calcule 20% de l'exp du monstre sauvage vaincu
+            monstreJoueur.exp += gainExp    // Ajoute ce gain au monstre du joueur (déclenche un éventuel levelUp)
+
 
             println("${monstreJoueur.nom} gagne $gainExp exp")
             return true
@@ -63,7 +64,7 @@ class CombatMonstre(
      * Si le monstre sauvage a encore des pv, il attaque le monstre du joueur.
      */
     fun actionAdversaire() {
-        if (monstreSauvage.pv > 0) {
+        if (monstreSauvage.pv > 0) {   // Si le monstre sauvage est encore en vie
             monstreSauvage.attaquer(monstreJoueur)
         }
     }
@@ -89,7 +90,7 @@ class CombatMonstre(
         val choixAction = readlnOrNull()?.toIntOrNull()
 
         when (choixAction) {
-            1 -> {
+            1 -> {    // Cas "Attaquer"
                 monstreJoueur.attaquer(monstreSauvage)
             }
 
@@ -99,11 +100,11 @@ class CombatMonstre(
                     println("$index. ${item.nom}")
                 }
 
-                val indexChoix = readlnOrNull()?.toIntOrNull()
-                val objetChoisi = indexChoix?.let { joueur.sacAItems.getOrNull(it) }
+                val indexChoix = readlnOrNull()?.toIntOrNull()   // Lit l'index de l'objet choisi
+                val objetChoisi = indexChoix?.let { joueur.sacAItems.getOrNull(it) }  // Récupère l'objet correspondant (null si invalide/hors limites)
 
                 if (objetChoisi is Utilisable) {
-                    val captureReussie = objetChoisi.utiliser(monstreSauvage)
+                    val captureReussie = objetChoisi.utiliser(monstreSauvage)    // Utilise l'objet sur le monstre sauvage
                     if (captureReussie) {
                         return false
                     }
@@ -114,8 +115,8 @@ class CombatMonstre(
 
             3 -> {
                 println("Équipe de monstres :")
-                val monstresDisponibles = joueur.equipeMonstre.filter { it.pv > 0 }
-                monstresDisponibles.forEachIndexed { index, monstre ->
+                val monstresDisponibles = joueur.equipeMonstre.filter { it.pv > 0 }  // Filtre les monstres encore en vie
+                monstresDisponibles.forEachIndexed { index, monstre -> // Parcourt les monstres disponibles
                     println("$index. ${monstre.nom}")
                 }
 
@@ -192,12 +193,12 @@ class CombatMonstre(
      */
     fun lanceCombat() {
         while (!gameOver() && !joueurGagne()) {
-            this.jouer()
+            this.jouer() // Joue un round complet
             println("======== Fin du Round : $round ========")
-            round++
+            round++ // Incrémente le numéro de round pour le suivant
         }
         if (gameOver()) {
-            joueur.equipeMonstre.forEach { it.pv = it.pvMax }
+            joueur.equipeMonstre.forEach { it.pv = it.pvMax }  // Restaure tous les pv de l'équipe à leur maximum
             println("Game Over !")
         }
     }
